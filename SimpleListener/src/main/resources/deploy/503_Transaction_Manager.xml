@@ -1,0 +1,21 @@
+<txnmgr name="SimpleTransactionManager" logger="Q2" class="org.jpos.transaction.TransactionManager">
+    <property name="space" value="transient:default" />
+    <property name="queue" value="TXNQueue" />
+    <!--<property name="persistent-space" value="tspace:TransactionSpace" />-->
+    <property name="sessions" value="5" />
+    <property name="debug" value="true" />
+
+    <participant class="com.gl.selector.Selector" name="Selector" logger="Q2">
+        <property name="0200" value="Transaction" />
+        <property name="0800" value="Network" />
+    </participant>
+    <participant class="com.gl.participant.SenderResponseParticipant" logger="Q2"/>
+    <group name="Transaction">
+        <participant class="com.gl.participant.TransactionResponseParticipant" logger="Q2" />
+    </group>
+
+    <group name="Network">
+        <participant class="com.gl.participant.NetworkParticipant" logger="Q2" />
+    </group>
+
+</txnmgr>
