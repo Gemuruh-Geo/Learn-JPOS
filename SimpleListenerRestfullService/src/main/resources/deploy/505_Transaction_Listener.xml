@@ -1,0 +1,17 @@
+<server class="org.jpos.q2.iso.QServer" logger="Q2" name="HostQServer502">
+    <attr name="port" type="java.lang.Integer">2300</attr>
+    <attr name="maxSessions" type="java.lang.Integer">20</attr>
+    <attr name="minSessions" type="java.lang.Integer">10</attr>
+
+    <channel class="org.jpos.iso.channel.ASCIIChannel" name="ASCIIChannel" logger="Q2"
+             packager="org.jpos.iso.packager.ISO87APackager">
+        <!--<property name="packager-config" value="cfg/packager/kartukuBillPaymentBinary.xml"/>-->
+        <!--<property name="packager-logger" value="Q2"/>-->
+    </channel>
+
+    <request-listener class="com.gl.listener.ServerApplicationListener" logger="Q2" name="isoListener">
+        <property name="space" value="transient:default" />
+        <property name="queue" value="TXNQueue" />
+        <property name="spaceTimeout" value="60000" />
+    </request-listener>
+</server>
